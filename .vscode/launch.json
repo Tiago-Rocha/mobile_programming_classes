@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "todo_app (class2)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/class2/main.dart"
+        },
+        {
+            "name": "todo_app (class3)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/class3/main.dart"
+        },
+        {
+            "name": "todo_app (class4)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/class4/main.dart"
+        },
+        {
+            "name": "todo_app (class5)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/class5/main.dart"
+        },
+        {
+            "name": "todo_app (class6)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/class6/main.dart"
+        }
+    ]
+}
