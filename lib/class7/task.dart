@@ -2,6 +2,7 @@
 /// Modelo da Task
 /// ---------------------
 class Task {
+  String id = DateTime.now().millisecondsSinceEpoch.toString();
   String title;
   bool isDone;
 

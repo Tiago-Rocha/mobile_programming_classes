@@ -1,25 +1,25 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/class5/classes_primitives_widgets.dart';
+import 'package:todo_app/class6/+shared_preferences.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: TodoApp6()));
 }
 
 class Task {
+  String id;
   String title;
   bool isDone;
 
-  Task({required this.title, this.isDone = false});
+  Task(String? id, {required this.title, this.isDone = false})
+    : id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
 
-  /// Converte Task para Map (para serializar em JSON)
-  Map<String, dynamic> toMap() {
-    return {'title': title, 'isDone': isDone};
-  }
+  Map<String, dynamic> toMap() => {'id': id, 'title': title, 'isDone': isDone};
 
-  /// Converte Map em Task (para deserializar JSON)
   factory Task.fromMap(Map<String, dynamic> map) {
-    return Task(title: map['title'], isDone: map['isDone'] ?? false);
+    return Task(map['id'], title: map['title'], isDone: map['isDone'] ?? false);
   }
 }
 
@@ -50,18 +50,14 @@ class _TodoApp6State extends State<TodoApp6> {
     });
   }
 
-  Future<void> _saveTasks() async {
-    final prefs = await SharedPreferences.getInstance();
-    final taskStrings = tasks.map((t) => jsonEncode(t.toMap())).toList();
-    await prefs.setStringList('tasks', taskStrings);
-  }
-
   Future<void> _addTask(String taskTitle) async {
     if (taskTitle.trim().isEmpty) return;
+    final newTask = Task(null, title: taskTitle);
     setState(() {
-      tasks.add(Task(title: taskTitle));
+      tasks.add(newTask);
     });
-    await _saveTasks();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.storeTask(newTask);
     _controller.clear();
   }
 
@@ -69,14 +65,14 @@ class _TodoApp6State extends State<TodoApp6> {
     setState(() {
       tasks[index].isDone = !tasks[index].isDone;
     });
-    await _saveTasks();
   }
 
   Future<void> _deleteTask(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.removeTask(tasks[index]);
     setState(() {
       tasks.removeAt(index);
     });
-    await _saveTasks();
   }
 
   @override
