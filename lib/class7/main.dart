@@ -16,7 +16,7 @@ class TodoApp7 extends StatefulWidget {
 }
 
 class _TodoApp7State extends State<TodoApp7> {
-  final TaskManager manager = TaskManager(repository: TaskRepository());
+  final TaskManager taskManager = TaskManager(repository: TaskRepository());
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -39,7 +39,7 @@ class _TodoApp7State extends State<TodoApp7> {
                   icon: const Icon(Icons.add),
                   onPressed: () {
                     if (_controller.text.isNotEmpty) {
-                      manager.addTask(Task(title: _controller.text));
+                      taskManager.addTask(Task(title: _controller.text));
                       _controller.clear();
                     }
                   },
@@ -49,12 +49,12 @@ class _TodoApp7State extends State<TodoApp7> {
           ),
           Expanded(
             child: ListenableBuilder(
-              listenable: manager,
+              listenable: taskManager,
               builder: (context, _) {
                 return ListView.builder(
-                  itemCount: manager.tasks.length,
+                  itemCount: taskManager.tasks.length,
                   itemBuilder: (context, index) {
-                    final task = manager.tasks[index];
+                    final task = taskManager.tasks[index];
                     return ListTile(
                       title: Text(task.title),
                       subtitle: Text(
@@ -64,11 +64,11 @@ class _TodoApp7State extends State<TodoApp7> {
                       ),
                       leading: Checkbox(
                         value: task.isDone,
-                        onChanged: (_) => manager.markDone(task.id),
+                        onChanged: (_) => taskManager.markDone(task.id),
                       ),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
-                        onPressed: () => manager.deleteTask(task.id),
+                        onPressed: () => taskManager.deleteTask(task.id),
                       ),
                     );
                   },
