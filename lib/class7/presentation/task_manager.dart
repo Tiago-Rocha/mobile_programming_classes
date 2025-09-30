@@ -30,6 +30,18 @@ class TaskManager extends ChangeNotifier {
     // 3. Save task
     // 4. Reload tasks
     // 5. Notify listeners
+    /*
+    Task fetchedTask = await repository.fetch(taskId);
+    await deleteTask(fetchedTask.id);
+    Task doneTask = Task(
+      id: fetchedTask.id,
+      title: fetchedTask.title,
+      isDone: !fetchedTask.isDone,
+    );
+    await repository.save(doneTask);
+    await _loadTasks();
+    notifyListeners();
+    */
   }
 
   Future<void> deleteTask(String taskId) async {
