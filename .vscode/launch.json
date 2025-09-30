@@ -30,6 +30,12 @@
             "request": "launch",
             "type": "dart",
             "program": "lib/class6/main.dart"
+        },
+        {
+            "name": "todo_app (class7)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/class7/main.dart"
         }
     ]
 }
