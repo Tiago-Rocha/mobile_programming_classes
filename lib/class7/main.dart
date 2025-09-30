@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:todo_app/class7/task.dart';
-import 'package:todo_app/class7/task_manager.dart';
-import 'package:todo_app/class7/task_repository.dart';
+import 'package:todo_app/class7/presentation/task.dart';
+import 'package:todo_app/class7/presentation/task_manager.dart';
+import 'package:todo_app/class7/presentation/task_repository.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: TodoApp7()));

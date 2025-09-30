@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/class7/task.dart';
+import 'package:todo_app/class7/presentation/task.dart';
 
 /// ---------------------
 /// Task Repository (persistência)

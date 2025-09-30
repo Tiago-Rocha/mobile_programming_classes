@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:todo_app/class7/task.dart';
-import 'package:todo_app/class7/task_repository.dart';
+import 'package:todo_app/class7/presentation/task.dart';
+import 'package:todo_app/class7/presentation/task_repository.dart';
 
 class TaskManager extends ChangeNotifier {
   final TaskRepository repository;
