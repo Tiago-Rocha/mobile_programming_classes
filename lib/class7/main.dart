@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:todo_app/class7/task.dart';
 import 'package:todo_app/class7/task_manager.dart';
+import 'package:todo_app/class7/task_repository.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: TodoApp7()));
@@ -16,45 +16,15 @@ class TodoApp7 extends StatefulWidget {
 }
 
 class _TodoApp7State extends State<TodoApp7> {
-  final TaskManager manager = TaskManager();
-  List<Task> tasks = [];
+  final TaskManager manager = TaskManager(repository: TaskRepository());
   final TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTasks();
-  }
-
-  Future<void> _loadTasks() async {
-    final loaded = await manager.loadTasks();
-    setState(() => tasks = loaded);
-  }
-
-  Future<void> _addTask(String title) async {
-    if (title.trim().isEmpty) return;
-    setState(() => tasks.add(Task(title: title)));
-    await manager.saveTasks(tasks);
-    _controller.clear();
-  }
-
-  Future<void> _toggleTask(int index) async {
-    setState(() => tasks[index].isDone = !tasks[index].isDone);
-    await manager.saveTasks(tasks);
-  }
-
-  Future<void> _deleteTask(int index) async {
-    setState(() => tasks.removeAt(index));
-    await manager.saveTasks(tasks);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Todo App - Class 6')),
+      appBar: AppBar(title: const Text('Todo App - Class 7')),
       body: Column(
         children: [
-          // Input + botão
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -67,33 +37,38 @@ class _TodoApp7State extends State<TodoApp7> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.add),
-                  onPressed: () => _addTask(_controller.text),
+                  onPressed: () {
+                    if (_controller.text.isNotEmpty) {
+                      manager.addTask(Task(title: _controller.text));
+                      _controller.clear();
+                    }
+                  },
                 ),
               ],
             ),
           ),
-          // Lista de tarefas
           Expanded(
-            child: ListView.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) => ListTile(
-                leading: Checkbox(
-                  value: tasks[index].isDone,
-                  onChanged: (_) => _toggleTask(index),
-                ),
-                title: Text(
-                  tasks[index].title,
-                  style: TextStyle(
-                    decoration: tasks[index].isDone
-                        ? TextDecoration.lineThrough
-                        : null,
-                  ),
-                ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () => _deleteTask(index),
-                ),
-              ),
+            child: ListenableBuilder(
+              listenable: manager,
+              builder: (context, _) {
+                return ListView.builder(
+                  itemCount: manager.tasks.length,
+                  itemBuilder: (context, index) {
+                    final task = manager.tasks[index];
+                    return ListTile(
+                      title: Text(task.title),
+                      leading: Checkbox(
+                        value: task.isDone,
+                        onChanged: (_) => manager.markDone(task.id),
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => manager.deleteTask(task.id),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],

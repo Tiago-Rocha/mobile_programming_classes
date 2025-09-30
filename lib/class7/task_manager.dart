@@ -1,23 +1,41 @@
-import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
 import 'package:todo_app/class7/task.dart';
+import 'package:todo_app/class7/task_repository.dart';
 
-/// ---------------------
-/// Task Manager (persistência)
-/// ---------------------
-class TaskManager {
-  static const _key = 'tasks';
+class TaskManager extends ChangeNotifier {
+  final TaskRepository repository;
+  List<Task> _tasks = [];
 
-  Future<List<Task>> loadTasks() async {
-    final prefs = await SharedPreferences.getInstance();
-    final taskStrings = prefs.getStringList(_key) ?? [];
-    return taskStrings.map((str) => Task.fromMap(jsonDecode(str))).toList();
+  List<Task> get tasks => _tasks;
+
+  TaskManager({required this.repository}) {
+    _loadTasks();
   }
 
-  Future<void> saveTasks(List<Task> tasks) async {
-    final prefs = await SharedPreferences.getInstance();
-    final taskStrings = tasks.map((t) => jsonEncode(t.toMap())).toList();
-    await prefs.setStringList(_key, taskStrings);
+  Future<void> _loadTasks() async {
+    _tasks = await repository.loadTasks();
+    notifyListeners();
+  }
+
+  Future<void> addTask(Task task) async {
+    await repository.save(task);
+    await _loadTasks();
+  }
+
+  // Leave these for students to implement
+  Future<void> markDone(String taskId) async {
+    // TODO
+    // 1. Get task from repository
+    // 2. Update isDone
+    // 3. Save task
+    // 4. Reload tasks
+    // 5. Notify listeners
+  }
+
+  Future<void> deleteTask(String taskId) async {
+    // TODO
+    // 1. Delete from repository
+    // 2. Reload tasks
+    // 3. Notify listeners
   }
 }
