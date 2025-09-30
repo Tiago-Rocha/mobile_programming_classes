@@ -1,16 +1,23 @@
-/// ---------------------
-/// Modelo da Task
-/// ---------------------
-class Task {
-  String id = DateTime.now().millisecondsSinceEpoch.toString();
-  String title;
-  bool isDone;
+import 'package:equatable/equatable.dart';
 
-  Task({required this.title, this.isDone = false});
+class Task extends Equatable {
+  final String id;
+  final String title;
+  final bool isDone;
 
-  Map<String, dynamic> toMap() => {'title': title, 'isDone': isDone};
+  Task({String? id, required this.title, this.isDone = false})
+    : id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
+
+  Map<String, dynamic> toMap() => {'id': id, 'title': title, 'isDone': isDone};
 
   factory Task.fromMap(Map<String, dynamic> map) {
-    return Task(title: map['title'], isDone: map['isDone'] ?? false);
+    return Task(
+      id: map['id'],
+      title: map['title'],
+      isDone: map['isDone'] ?? false,
+    );
   }
+
+  @override
+  List<Object?> get props => [id, title];
 }

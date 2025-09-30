@@ -33,10 +33,12 @@ class TaskRepository {
     final tasks = taskStrings
         .map((str) => Task.fromMap(jsonDecode(str)))
         .toList();
+
     tasks.removeWhere((task) => task.id == taskID);
     final updatedTaskStrings = tasks
         .map((task) => jsonEncode(task.toMap()))
         .toList();
+
     return await prefs.setStringList(_key, updatedTaskStrings);
   }
 }

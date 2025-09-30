@@ -57,6 +57,11 @@ class _TodoApp7State extends State<TodoApp7> {
                     final task = manager.tasks[index];
                     return ListTile(
                       title: Text(task.title),
+                      subtitle: Text(
+                        DateTime.fromMillisecondsSinceEpoch(
+                          int.parse(task.id),
+                        ).toLocal().toString(),
+                      ),
                       leading: Checkbox(
                         value: task.isDone,
                         onChanged: (_) => manager.markDone(task.id),
