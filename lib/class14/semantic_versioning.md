@@ -38,11 +38,47 @@ MAJOR.MINOR.PATCH
 
 ---
 
-## 🧰 Real-world Example (Flutter)
+## 🧰 Dummy Example
 
-The Flutter `video_player` package:  
-- `2.8.1` → Added subtitle support *(MINOR)*  
-- `3.0.0` → Changed controller API *(MAJOR)*  
+This example demonstrates a **breaking change** that requires a **MAJOR version bump** according to [Semantic Versioning](https://semver.org).
+
+---
+
+## 🧩 Before — Version 1.2.0
+
+```dart
+// calculator_v1.dart
+// Version 1.2.0
+
+class Calculator {
+  /// Returns the sum of two integers.
+  int sum(int a, int b) {
+    return a + b;
+  }
+}
+
+void main() {
+  final calc = Calculator();
+  final result = calc.sum(2, 3);
+  print(result); // ✅ Prints: 5
+}
+
+// calculator_v2.dart
+// Version 2.0.0
+
+class Calculator {
+  /// Returns the sum of two numbers as a double.
+  /// ⚠️ Breaking change: return type changed from int → double.
+  double sum(num a, num b) {
+    return (a + b).toDouble();
+  }
+}
+
+void main() {
+  final calc = Calculator();
+  // ❌ Previously valid code now fails:
+  int result = calc.sum(2, 3); // Error: type 'double' can't be assigned to 'int'
+}
 
 ---
 
