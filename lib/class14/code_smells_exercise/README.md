@@ -16,16 +16,15 @@ Your goal is to **identify and fix** them using **best practices**.
 
 ## 🪛 Instructions
 
-1. **Fork** this repository.
-2. **Create a new branch** for each smell:
+1. **Create a new branch** for each smell:
    ```bash
    git checkout -b refactor/task-service
    ```
-3. **Fix one smell at a time**, committing with:
+2. **Fix one smell at a time**, committing with:
    ```bash
    git commit -m "refactor(task): remove duplicated addAnotherTask()"
    ```
-4. **Open a Pull Request** with:
+3. **Open a Pull Request** with:
    - What was wrong
    - Why your fix improves it
    - What you learned
