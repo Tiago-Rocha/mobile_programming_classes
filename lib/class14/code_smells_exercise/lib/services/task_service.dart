@@ -10,15 +10,7 @@ class TaskService {
       tasks.add(Task(title, false, username));
       logger.log("Task added: " + title);
     } else {
-      print("Error");
-    }
-  }
-// Removido o codigo duplicado do add task
-  void addAnotherTask(String title, String username) {
-    if (title != "") {
-      addTask(title, username);
-    } else {
-      print("Error");
+      print("Error: Title cannot be empty");
     }
   }
 

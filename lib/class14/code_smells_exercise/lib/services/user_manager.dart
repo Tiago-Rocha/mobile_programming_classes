@@ -6,9 +6,10 @@ class UserManager {
   List<User> users = [];
   final logger = Logger();
   final taskService = TaskService();
+  final int minimumNameLength = 3;
 
   void register(String name) {
-    if (name.length > 3) {
+    if (name.length > minimumNameLength) {
       users.add(User(name));
       logger.log("User registered: $name");
     } else {

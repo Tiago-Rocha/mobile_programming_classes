@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../class6/main.dart';
+import '../class6/main.js';
 
 extension TaskSharedPreference on SharedPreferences {
   Future<bool> storeTask(Task task) async {
