@@ -35,7 +35,10 @@ class TaskManager extends ChangeNotifier {
   Future<void> deleteTask(String taskId) async {
     // TODO
     // 1. Delete from repository
+    await repository.delete(taskId);
     // 2. Reload tasks
+    await _loadTasks();
     // 3. Notify listeners
+    notifyListeners();
   }
 }
