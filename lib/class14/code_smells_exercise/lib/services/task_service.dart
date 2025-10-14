@@ -1,7 +1,6 @@
 import '../models/task.dart';
 import 'logger.dart';
 
-// ❌ BAD: Duplicated logic, long methods, poor naming.
 class TaskService {
   final List<Task> tasks = [];
   final logger = Logger();

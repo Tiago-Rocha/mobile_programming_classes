@@ -1,5 +1,3 @@
-// ❌ BAD: Business logic mixed with UI, duplicate code, poor naming.
-
 import 'package:flutter/material.dart';
 import '../services/user_manager.dart';
 
@@ -21,8 +19,14 @@ class _TaskScreenState extends State<TaskScreen> {
       appBar: AppBar(title: const Text("Task Tracker")),
       body: Column(
         children: [
-          TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: "User name")),
-          TextField(controller: taskCtrl, decoration: const InputDecoration(labelText: "Task title")),
+          TextField(
+            controller: nameCtrl,
+            decoration: const InputDecoration(labelText: "User name"),
+          ),
+          TextField(
+            controller: taskCtrl,
+            decoration: const InputDecoration(labelText: "Task title"),
+          ),
           ElevatedButton(
             onPressed: () {
               manager.register(nameCtrl.text);
@@ -37,7 +41,7 @@ class _TaskScreenState extends State<TaskScreen> {
               setState(() {});
             },
             child: const Text("Show All"),
-          )
+          ),
         ],
       ),
     );

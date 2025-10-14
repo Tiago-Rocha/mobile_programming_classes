@@ -2,7 +2,6 @@ import '../models/user.dart';
 import 'logger.dart';
 import 'task_service.dart';
 
-// ❌ BAD: Large class, multiple responsibilities, no dependency injection.
 class UserManager {
   List<User> users = [];
   final logger = Logger();

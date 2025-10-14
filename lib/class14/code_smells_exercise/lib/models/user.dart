@@ -1,4 +1,3 @@
-// ❌ BAD: Mixed responsibilities, poor naming, no validation.
 class User {
   String name;
   List<String> taskTitles = [];
