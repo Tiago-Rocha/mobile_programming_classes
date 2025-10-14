@@ -13,11 +13,10 @@ class TaskService {
       print("Error");
     }
   }
-
+// Removido o codigo duplicado do add task
   void addAnotherTask(String title, String username) {
     if (title != "") {
-      tasks.add(Task(title, false, username));
-      logger.log("Task added: " + title);
+      addTask(title, username);
     } else {
       print("Error");
     }
