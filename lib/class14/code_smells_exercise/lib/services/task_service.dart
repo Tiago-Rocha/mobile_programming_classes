@@ -1,6 +1,8 @@
 import '../models/task.dart';
 import 'logger.dart';
 
+//A classe TaskService está com code smells, pois há duplicação de código nos métodos addTask e addAnotherTask.
+
 class TaskService {
   final List<Task> tasks = [];
   final logger = Logger();
@@ -14,13 +16,10 @@ class TaskService {
     }
   }
 
+// Usar o método addTask para não duplicar código
+
   void addAnotherTask(String title, String username) {
-    if (title != "") {
-      tasks.add(Task(title, false, username));
-      logger.log("Task added: " + title);
-    } else {
-      print("Error");
-    }
+    addTask(title, username);
   }
 
   void showAllTasks() {
