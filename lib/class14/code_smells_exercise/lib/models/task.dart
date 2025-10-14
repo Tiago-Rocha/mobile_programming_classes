@@ -4,8 +4,4 @@ class Task {
   String user;
 
   Task(this.title, this.done, this.user);
-
-  void printTask() {
-    print(title + " -> " + (done ? "DONE" : "TODO"));
-  }
 }
