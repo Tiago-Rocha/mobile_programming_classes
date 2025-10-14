@@ -10,16 +10,7 @@ class TaskService {
       tasks.add(Task(title, false, username));
       logger.log("Task added: " + title);
     } else {
-      print("Error");
-    }
-  }
-
-  void addAnotherTask(String title, String username) {
-    if (title != "") {
-      tasks.add(Task(title, false, username));
-      logger.log("Task added: " + title);
-    } else {
-      print("Error");
+      print("Error: Title cannot be empty");
     }
   }
 
