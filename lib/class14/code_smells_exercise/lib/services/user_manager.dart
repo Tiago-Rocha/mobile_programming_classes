@@ -18,17 +18,17 @@ class UserManager {
   }
 
   void assignTask(String userName, String title) {
-    for (var u in users) {
-      if (u.name == userName) {
+    for (var user in users) {
+      if (user.name == userName) {
         taskService.addTask(title, userName);
-        u.add(title);
+        user.add(title);
       }
     }
   }
 
   void showAllUsers() {
-    for (var u in users) {
-      u.printInfo();
+    for (var user in users) {
+      user.printInfo();
     }
   }
 
