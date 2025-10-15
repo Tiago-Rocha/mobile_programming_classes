@@ -3,7 +3,9 @@ import 'logger.dart';
 
 class TaskService {
   final List<Task> tasks = [];
-  final logger = Logger();
+  final Logger logger;
+
+  TaskService({required this.logger});
 
   void addTask(String title, String username) {
     if (title != "") {
