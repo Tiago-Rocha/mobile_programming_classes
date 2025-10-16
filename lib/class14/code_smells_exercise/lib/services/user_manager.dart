@@ -20,7 +20,6 @@ class UserManager {
     for (var u in users) {
       if (u.name == userName) {
         taskService.addTask(title, userName);
-        u.add(title);
       }
     }
   }
