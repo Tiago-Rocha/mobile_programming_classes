@@ -1,13 +1,9 @@
+// This class has code smells because it tries to add tasks to users, when it should only represent a user.
 class User {
   String name;
   List<String> taskTitles = [];
 
   User(this.name);
-
-  void add(String title) {
-    taskTitles.add(title);
-    print("Added task " + title + " to " + name);
-  }
 
   void printInfo() {
     print("USER INFO START");
