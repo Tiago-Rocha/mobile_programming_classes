@@ -1,8 +1,9 @@
 class User {
   String name;
+  int id;
   List<String> taskTitles = [];
 
-  User(this.name);
+  User(this.id,this.name);
 
   void add(String title) {
     taskTitles.add(title);

@@ -9,7 +9,9 @@ class TaskService {
 
   void addTask(String title, String username) {
     if (title != "") {
-      tasks.add(Task(title, false, username));
+      int id = 1;
+      id++;
+      tasks.add(Task(id, title, false, username));
       logger.log("Task added: " + title);
     } else {
       print("Error: Title cannot be empty");
