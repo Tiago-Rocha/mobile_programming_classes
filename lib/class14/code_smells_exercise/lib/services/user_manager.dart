@@ -10,7 +10,9 @@ class UserManager {
 
   void register(String name) {
     if (name.length > minimumNameLength) {
-      users.add(User(name));
+      int id = 1;
+      id++;
+      users.add(User(id, name));
       logger.log("User registered: $name");
     } else {
       print("Invalid name");
