@@ -5,7 +5,7 @@ import 'task_service.dart';
 class UserManager {
   List<User> users = [];
   final logger = Logger();
-  final taskService = TaskService();
+  final taskService = TaskService(logger: Logger());
   final int minimumNameLength = 3;
 
   void register(String name) {
